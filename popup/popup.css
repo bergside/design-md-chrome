@@ -15,7 +15,7 @@
 
 body {
   margin: 0;
-  width: 420px;
+  width: 480px;
   min-height: 520px;
   font-family: "Geist", "Sohne", "SF Pro Text", "Helvetica Neue", sans-serif;
   color: var(--text);
