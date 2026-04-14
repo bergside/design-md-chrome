@@ -15,7 +15,7 @@
 
 body {
   margin: 0;
-  width: 480px;
+  width: 540px;
   min-height: 520px;
   font-family: "Geist", "Sohne", "SF Pro Text", "Helvetica Neue", sans-serif;
   color: var(--text);
@@ -167,6 +167,7 @@ textarea {
 }
 
 .icon-btn {
+  position: relative;
   width: 28px;
   height: 28px;
   display: flex;
@@ -192,6 +193,34 @@ textarea {
   color: var(--black);
   background: #f9f9f9;
   border-color: var(--line-strong);
+}
+
+.icon-btn::after {
+  content: attr(aria-label);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: var(--black);
+  color: var(--white);
+  font-size: 11px;
+  font-weight: 500;
+  padding: 4px 8px;
+  border-radius: 4px;
+  pointer-events: none;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+  transition-delay: 0.1s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+}
+
+.icon-btn:hover::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
 }
 
 .icon-btn.copied {
