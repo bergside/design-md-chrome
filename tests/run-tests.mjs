@@ -105,16 +105,24 @@ const skillValidation = validateMarkdownOutput("skill", skillMd);
 
 assert.ok(designValidation.isValid, `DESIGN.md should be valid: ${designValidation.errors.join(", ")}`);
 assert.ok(skillValidation.isValid, `SKILL.md should be valid: ${skillValidation.errors.join(", ")}`);
+
+// DESIGN.md — spec-compliant structure
+assert.ok(designMd.startsWith("---"), "DESIGN.md should start with YAML frontmatter");
+assert.ok(designMd.includes("version: alpha"), "DESIGN.md should include spec version");
+assert.ok(designMd.includes("## Overview"), "DESIGN.md should include Overview section");
+assert.ok(designMd.includes("## Do's and Don'ts"), "DESIGN.md should include Do's and Don'ts section");
+assert.ok(designMd.includes("WCAG AA"), "DESIGN.md should include accessibility target");
+assert.ok(designMd.includes("https://example.com/dashboard"), "DESIGN.md should include extraction URL");
+assert.ok(designMd.includes("Inter"), "DESIGN.md should include inferred main font family");
+assert.ok(designMd.includes("authenticated users and operators"), "DESIGN.md should infer audience from site signals");
+assert.ok(designMd.includes("Product surface: dashboard web app"), "DESIGN.md should infer product surface from site signals");
+assert.ok(!designMd.includes("Audience/surface inference confidence"), "DESIGN.md should not include inference confidence text");
+
+// SKILL.md — unchanged format
 assert.ok(skillMd.includes("TYPEUI_SH_MANAGED_START"), "SKILL.md should include managed markers");
-assert.ok(designMd.includes("WCAG 2.2 AA"), "DESIGN.md should include accessibility target");
-assert.ok(designMd.includes("- URL: https://example.com/dashboard"), "DESIGN.md should include extraction URL");
-assert.ok(designMd.includes("- Main font style: `font.family.primary=Inter`"), "DESIGN.md should include inferred main font style");
 assert.ok(skillMd.includes("- URL: https://example.com/dashboard"), "SKILL.md should include extraction URL");
 assert.ok(skillMd.includes("- Main font style: `font.family.primary=Inter`"), "SKILL.md should include inferred main font style");
-assert.ok(designMd.includes("- Audience: authenticated users and operators"), "DESIGN.md should infer audience from site signals");
-assert.ok(designMd.includes("- Product surface: dashboard web app"), "DESIGN.md should infer product surface from site signals");
 assert.ok(skillMd.includes("- Product surface: dashboard web app"), "SKILL.md should infer product surface from site signals");
-assert.ok(!designMd.includes("Audience/surface inference confidence"), "DESIGN.md should not include inference confidence text");
 assert.ok(!skillMd.includes("Audience/surface inference confidence"), "SKILL.md should not include inference confidence text");
 
 console.log("All tests passed.");
